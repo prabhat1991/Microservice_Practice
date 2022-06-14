@@ -13,6 +13,7 @@ public class FilterUtils {
     public static final String PRE_FILTER_TYPE = "pre";
     public static final String POST_FILTER_TYPE = "post";
     public static final String ROUTE_FILTER_TYPE = "route";
+    public static final String AUTHORIZATION_HEADER = "Authorization";
 
     public String getCorrelationId(){
         RequestContext ctx = RequestContext.getCurrentContext();
@@ -71,6 +72,11 @@ public class FilterUtils {
         //We might not have a service id if we are using a static, non-eureka route.
         if (ctx.get("serviceId")==null) return "";
         return ctx.get("serviceId").toString();
+    }
+    
+    public void forwardAuthToken(String authToken){
+        RequestContext ctx = RequestContext.getCurrentContext();
+        ctx.addZuulRequestHeader(AUTHORIZATION_HEADER, authToken);
     }
 
 
