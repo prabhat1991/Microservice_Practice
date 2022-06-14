@@ -1,14 +1,19 @@
+spring:
+  application:
+    name: eureka-Server
+    
 server:
   port: 9001
 
 eureka:
   client:
-    registerWithEureka: false
-    fetchRegistry: false
+    registerWithEureka: true
+    fetchRegistry: true
+    service-url:
+      defaultZone: http://localhost:9001/eureka
   server:
     waitTimeInMsWhenSyncEmpty: 5
-  service-url:
-     defaultZone: http://eureka1:9001/eureka
+     
 
 
 #Setting logging levels

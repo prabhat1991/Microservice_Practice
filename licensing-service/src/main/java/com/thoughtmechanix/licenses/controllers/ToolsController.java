@@ -1,12 +1,14 @@
 package com.thoughtmechanix.licenses.controllers;
 
-import com.thoughtmechanix.licenses.services.DiscoveryService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import com.thoughtmechanix.licenses.services.DiscoveryService;
 
 @RestController
 @RequestMapping(value="v1/tools")
@@ -20,9 +22,14 @@ public class ToolsController {
         return discoveryService.getEurekaServices();
     }
     
-    @RequestMapping(value="/test",method = RequestMethod.GET)
-    public String test() {
-
-        return "Test Success";
+    @RequestMapping(value="/create",method = RequestMethod.GET)
+    @PreAuthorize("hasAuthority('Role_USER')")
+    public String create() {
+        return "Test create";
+    }
+    
+    @RequestMapping(value="/read",method = RequestMethod.GET)
+    public String read() {
+        return "Test read";
     }
 }
