@@ -1,4 +1,4 @@
-package com.thoughtmechanix.authentication.security.userdetails;
+package com.thoughtmechanix.authentication.security.dto;
 
 import java.util.Arrays;
 import java.util.Collection;

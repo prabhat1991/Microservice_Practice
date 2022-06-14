@@ -8,6 +8,7 @@ import org.springframework.security.oauth2.config.annotation.configurers.ClientD
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.ClientDetailsService;
 
 @Configuration
 public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
@@ -17,6 +18,9 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
     
     @Autowired
     private UserDetailsService userDetailsService;
+    
+    @Autowired
+    private ClientDetailsService clientDetailsService;
     
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
@@ -32,11 +36,13 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+    	
+		clients.withClientDetails(clientDetailsService).build();
 
-        clients.inMemory()
-                .withClient("client")
-                .secret("pass")
-                .authorizedGrantTypes("refresh_token", "password", "client_credentials")
-                .scopes("webclient", "mobileclient");
+//        clients.inMemory()
+//                .withClient("client")
+//                .secret("pass")
+//                .authorizedGrantTypes("refresh_token", "password", "client_credentials")
+//                .scopes("webclient", "mobileclient");
     }
 }

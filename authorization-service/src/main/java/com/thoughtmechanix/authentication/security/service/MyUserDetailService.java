@@ -1,4 +1,4 @@
-package com.thoughtmechanix.authentication.security.userdetailservice;
+package com.thoughtmechanix.authentication.security.service;
 
 import java.util.Optional;
 
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.thoughtmechanix.authentication.model.User;
 import com.thoughtmechanix.authentication.repository.UserRepository;
-import com.thoughtmechanix.authentication.security.userdetails.MyUserDetails;
+import com.thoughtmechanix.authentication.security.dto.MyUserDetails;
 
 @Service
 public class MyUserDetailService implements UserDetailsService {
