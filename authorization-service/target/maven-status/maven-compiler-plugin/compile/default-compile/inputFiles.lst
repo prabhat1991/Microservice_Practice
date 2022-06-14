@@ -1,0 +1,7 @@
+D:\Workspaces\MicroserviceInAction\spmia-chapter10\authentication-service\src\main\java\com\thoughtmechanix\authentication\config\ServiceConfig.java
+D:\Workspaces\MicroserviceInAction\spmia-chapter10\authentication-service\src\main\java\com\thoughtmechanix\authentication\security\WebSecurityConfigurer.java
+D:\Workspaces\MicroserviceInAction\spmia-chapter10\authentication-service\src\main\java\com\thoughtmechanix\authentication\Application.java
+D:\Workspaces\MicroserviceInAction\spmia-chapter10\authentication-service\src\main\java\com\thoughtmechanix\authentication\security\OAuth2Config.java
+D:\Workspaces\MicroserviceInAction\spmia-chapter10\authentication-service\src\main\java\com\thoughtmechanix\authentication\repository\OrgUserRepository.java
+D:\Workspaces\MicroserviceInAction\spmia-chapter10\authentication-service\src\main\java\com\thoughtmechanix\authentication\InspectHeaderFilter.java
+D:\Workspaces\MicroserviceInAction\spmia-chapter10\authentication-service\src\main\java\com\thoughtmechanix\authentication\model\UserOrganization.java
