@@ -33,10 +33,12 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 
+    	//authorization_code is required when performing Auth2SSo from UI-Simulator
+    	
         clients.inMemory()
                 .withClient("client")
                 .secret("pass")
-                .authorizedGrantTypes("refresh_token", "password", "client_credentials")
+                .authorizedGrantTypes("authorization_code", "refresh_token", "password", "client_credentials")
                 .scopes("webclient", "mobileclient");
     }
 }

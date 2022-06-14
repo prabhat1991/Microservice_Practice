@@ -1,5 +1,6 @@
 server:
   port: 9003
+  contextPath: /auth
 spring:
   jpa:
     database: POSTGRESQL
@@ -32,5 +33,3 @@ eureka:
     fetchRegistry: true
     serviceUrl:
         defaultZone: http://localhost:9001/eureka/
-#server:
-#  contextPath:   /auth
