@@ -4,10 +4,10 @@ public class License {
 	
 	private String licenseId;
 	private String organizationId;
-	private String organizationName = "";
-	private String contactName = "";
-	private String contactPhone = "";
-	private String contactEmail = "";
+	private String organizationName;
+	private String contactName;
+	private String contactPhone;
+	private String contactEmail;
 	private String productName;
 	private String licenseType;
 	private Integer licenseMax;

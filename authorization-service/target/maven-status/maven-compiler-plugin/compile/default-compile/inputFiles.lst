@@ -1,7 +1,7 @@
-D:\Workspaces\MicroserviceInAction\spmia-chapter10\authentication-service\src\main\java\com\thoughtmechanix\authentication\config\ServiceConfig.java
-D:\Workspaces\MicroserviceInAction\spmia-chapter10\authentication-service\src\main\java\com\thoughtmechanix\authentication\security\WebSecurityConfigurer.java
-D:\Workspaces\MicroserviceInAction\spmia-chapter10\authentication-service\src\main\java\com\thoughtmechanix\authentication\Application.java
-D:\Workspaces\MicroserviceInAction\spmia-chapter10\authentication-service\src\main\java\com\thoughtmechanix\authentication\security\OAuth2Config.java
-D:\Workspaces\MicroserviceInAction\spmia-chapter10\authentication-service\src\main\java\com\thoughtmechanix\authentication\repository\OrgUserRepository.java
-D:\Workspaces\MicroserviceInAction\spmia-chapter10\authentication-service\src\main\java\com\thoughtmechanix\authentication\InspectHeaderFilter.java
-D:\Workspaces\MicroserviceInAction\spmia-chapter10\authentication-service\src\main\java\com\thoughtmechanix\authentication\model\UserOrganization.java
+D:\Workspaces\Microservice_Practice\authorization-service\src\main\java\com\prabhat\authentication\model\User.java
+D:\Workspaces\Microservice_Practice\authorization-service\src\main\java\com\prabhat\authentication\security\userdetailservice\MyUserDetailService.java
+D:\Workspaces\Microservice_Practice\authorization-service\src\main\java\com\prabhat\authentication\security\userdetails\MyUserDetails.java
+D:\Workspaces\Microservice_Practice\authorization-service\src\main\java\com\prabhat\authentication\security\WebSecurityConfigurer.java
+D:\Workspaces\Microservice_Practice\authorization-service\src\main\java\com\prabhat\authentication\security\OAuth2Config.java
+D:\Workspaces\Microservice_Practice\authorization-service\src\main\java\com\prabhat\authentication\Application.java
+D:\Workspaces\Microservice_Practice\authorization-service\src\main\java\com\prabhat\authentication\repository\UserRepository.java

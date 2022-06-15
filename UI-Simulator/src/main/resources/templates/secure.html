@@ -16,12 +16,13 @@
 	<div class="container">
 		<div class="jumbotron">
 			<h1>secured page</h1>
-			<form name="fetch-customers" th:action="@{/customers}"
-				th:formmethod="POST">
+			<form name="fetch-customers" th:action="@{/license}"
+				th:formmethod="GET">
 				<button type="submit" class="btn btn-primary">Licenses</button>
 			</form>
+			
+			<a href="/addlicense">Add License</a>
 		</div>
-
 
 		<div th:unless="${error==null}">
 			<table class="table">
@@ -37,6 +38,11 @@
 				</tr>
 			</table>
 		</div>
+		
+		<div th:if="${licenseAdded==true}">
+			<p>License Added  successfully</p>
+		</div>
+
 
 
 		<div th:if="${error==null}">
