@@ -1,7 +1,0 @@
-D:\Workspaces\Microservice_Practice\authorization-service\src\main\java\com\prabhat\authentication\model\User.java
-D:\Workspaces\Microservice_Practice\authorization-service\src\main\java\com\prabhat\authentication\security\userdetailservice\MyUserDetailService.java
-D:\Workspaces\Microservice_Practice\authorization-service\src\main\java\com\prabhat\authentication\security\userdetails\MyUserDetails.java
-D:\Workspaces\Microservice_Practice\authorization-service\src\main\java\com\prabhat\authentication\security\WebSecurityConfigurer.java
-D:\Workspaces\Microservice_Practice\authorization-service\src\main\java\com\prabhat\authentication\security\OAuth2Config.java
-D:\Workspaces\Microservice_Practice\authorization-service\src\main\java\com\prabhat\authentication\Application.java
-D:\Workspaces\Microservice_Practice\authorization-service\src\main\java\com\prabhat\authentication\repository\UserRepository.java

@@ -1,7 +1,0 @@
-com\prabhat\authentication\security\userdetails\MyUserDetails.class
-com\prabhat\authentication\security\OAuth2Config.class
-com\prabhat\authentication\security\userdetailservice\MyUserDetailService.class
-com\prabhat\authentication\model\User.class
-com\prabhat\authentication\repository\UserRepository.class
-com\prabhat\authentication\Application.class
-com\prabhat\authentication\security\WebSecurityConfigurer.class
