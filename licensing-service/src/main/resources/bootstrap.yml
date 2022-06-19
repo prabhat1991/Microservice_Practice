@@ -7,7 +7,7 @@ spring:
   cloud:
     config:
       enabled: true
-      uri: http://localhost:9000
+      uri: http://configservice:9000
 #      discovery:
 #        enabled: true
 #        serviceId: configserver

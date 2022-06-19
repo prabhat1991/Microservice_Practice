@@ -15,7 +15,7 @@ spring:
   datasource:
     platform: postgres
     driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/testDB
+    url: jdbc:postgresql://postgresTestDB:5432/testDB
     username: postgres
     password: postgres
     testWhileIdle: 'true'
@@ -28,12 +28,12 @@ eureka:
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl:
-        defaultZone: http://localhost:9001/eureka/
+        defaultZone: http://eurekaservice:9001/eureka/
         
 security:
   oauth2:
     resource:
-      token-info-uri: http://localhost:9003/auth/oauth/check_token
+      token-info-uri: http://authorizationservice:9003/auth/oauth/check_token
     client:
       client-id: client
       client-secret: pass

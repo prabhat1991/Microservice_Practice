@@ -1,0 +1,82 @@
+version: '3'
+services:
+  postgresTestDB:
+    image: postgres
+    environment:
+      - POSTGRES_DB=testDB
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 5432:5432
+    restart: always
+  postgresSecurityDB:
+    image: postgres
+    environment:
+      - POSTGRES_DB=securityDB
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 5431:5432
+    restart: always
+
+  eurekaservice:
+    image: prabhatkumar/eurekaservice:Latest
+    ports:
+     - 9001:9001
+    restart: always
+  configservice:
+    image: prabhatkumar/configservice:Latest
+    ports:
+     - 9000:9000
+    restart: always 
+    command: sh -c "/wait && java -jar configurationserver-0.0.1-SNAPSHOT.jar"
+    environment:
+      - WAIT_HOSTS=eurekaservice:9001
+      - WAIT_HOSTS_TIMEOUT=300
+      - WAIT_SLEEP_INTERVAL=30
+      - WAIT_HOST_CONNECT_TIMEOUT=30
+  zuulservice:
+    image: prabhatkumar/zuulservice:Latest
+    ports:
+     - 9002:9002
+    restart: always 
+    command: sh -c "/wait && java -jar zuulsvr-0.0.1-SNAPSHOT.jar"
+    environment:
+      - WAIT_HOSTS=eurekaservice:9001,  configservice:9000
+      - WAIT_HOSTS_TIMEOUT=300
+      - WAIT_SLEEP_INTERVAL=30
+      - WAIT_HOST_CONNECT_TIMEOUT=30
+  authorizationservice:
+    image: prabhatkumar/authorizationservice:Latest
+    ports:
+     - 9003:9003
+    restart: always 
+    command: sh -c "/wait && java -jar authorization-service-0.0.1-SNAPSHOT.jar"
+    environment:
+      - WAIT_HOSTS=eurekaservice:9001, configservice:9000
+      - WAIT_HOSTS_TIMEOUT=300
+      - WAIT_SLEEP_INTERVAL=30
+      - WAIT_HOST_CONNECT_TIMEOUT=30
+  licensingservice:
+    image: prabhatkumar/licensingservice:Latest
+    ports:
+     - 8081:8081
+    restart: always 
+    command: sh -c "/wait && java -jar licensing-service-0.0.1-SNAPSHOT.jar"
+    environment:
+      - WAIT_HOSTS=eurekaservice:9001, configservice:9000
+      - WAIT_HOSTS_TIMEOUT=300
+      - WAIT_SLEEP_INTERVAL=30
+      - WAIT_HOST_CONNECT_TIMEOUT=30
+  organizationservice:
+    image: prabhatkumar/organizationservice:Latest
+    ports:
+     - 8082:8082
+    restart: always 
+    command: sh -c "/wait && java -jar organization-service-0.0.1-SNAPSHOT.jar"
+    environment:
+      - WAIT_HOSTS=eurekaservice:9001, configservice:9000
+      - WAIT_HOSTS_TIMEOUT=300
+      - WAIT_SLEEP_INTERVAL=30
+      - WAIT_HOST_CONNECT_TIMEOUT=30
+      
