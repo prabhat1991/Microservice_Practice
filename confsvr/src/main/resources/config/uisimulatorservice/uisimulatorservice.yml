@@ -1,0 +1,25 @@
+server:
+  port: 5000
+#  servlet:
+#    session:
+#      cookie:
+#        name: KSESSION  
+
+security:
+  oauth2:
+    client:
+      client-id: client
+      client-secret: pass
+      user-authorization-uri: http://authorizationservice:9003/auth/oauth/authorize
+      access-token-uri: http://authorizationservice:9003/auth/oauth/token
+    resource:
+      token-info-uri: http://authorizationservice:9003/auth/oauth/check_token
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+        defaultZone: http://eurekaservice:9001/eureka/

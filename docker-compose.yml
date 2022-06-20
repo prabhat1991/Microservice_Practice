@@ -8,7 +8,7 @@ services:
       - POSTGRES_PASSWORD=postgres
     ports:
       - 5432:5432
-    restart: always
+    restart: on-failure
   postgresSecurityDB:
     image: postgres
     environment:
@@ -17,18 +17,22 @@ services:
       - POSTGRES_PASSWORD=postgres
     ports:
       - 5431:5432
-    restart: always
+    restart: on-failure
 
   eurekaservice:
     image: prabhatkumar/eurekaservice:Latest
+    hostname: eurekaservice
+    container_name: eurekaservice
     ports:
      - 9001:9001
-    restart: always
+    restart: on-failure
   configservice:
     image: prabhatkumar/configservice:Latest
+    hostname: configservice
+    container_name: configservice
     ports:
      - 9000:9000
-    restart: always 
+    restart: on-failure 
     command: sh -c "/wait && java -jar configurationserver-0.0.1-SNAPSHOT.jar"
     environment:
       - WAIT_HOSTS=eurekaservice:9001
@@ -37,9 +41,11 @@ services:
       - WAIT_HOST_CONNECT_TIMEOUT=30
   zuulservice:
     image: prabhatkumar/zuulservice:Latest
+    hostname: zuulservice
+    container_name: zuulservice
     ports:
      - 9002:9002
-    restart: always 
+    restart: on-failure 
     command: sh -c "/wait && java -jar zuulsvr-0.0.1-SNAPSHOT.jar"
     environment:
       - WAIT_HOSTS=eurekaservice:9001,  configservice:9000
@@ -48,9 +54,11 @@ services:
       - WAIT_HOST_CONNECT_TIMEOUT=30
   authorizationservice:
     image: prabhatkumar/authorizationservice:Latest
+    hostname: authorizationservice
+    container_name: authorizationservice
     ports:
      - 9003:9003
-    restart: always 
+    restart: on-failure 
     command: sh -c "/wait && java -jar authorization-service-0.0.1-SNAPSHOT.jar"
     environment:
       - WAIT_HOSTS=eurekaservice:9001, configservice:9000
@@ -59,9 +67,11 @@ services:
       - WAIT_HOST_CONNECT_TIMEOUT=30
   licensingservice:
     image: prabhatkumar/licensingservice:Latest
+    hostname: licensingservice
+    container_name: licensingservice
     ports:
      - 8081:8081
-    restart: always 
+    restart: on-failure 
     command: sh -c "/wait && java -jar licensing-service-0.0.1-SNAPSHOT.jar"
     environment:
       - WAIT_HOSTS=eurekaservice:9001, configservice:9000
@@ -70,10 +80,25 @@ services:
       - WAIT_HOST_CONNECT_TIMEOUT=30
   organizationservice:
     image: prabhatkumar/organizationservice:Latest
+    hostname: organizationservice
+    container_name: organizationservice
     ports:
      - 8082:8082
-    restart: always 
+    restart: on-failure 
     command: sh -c "/wait && java -jar organization-service-0.0.1-SNAPSHOT.jar"
+    environment:
+      - WAIT_HOSTS=eurekaservice:9001, configservice:9000
+      - WAIT_HOSTS_TIMEOUT=300
+      - WAIT_SLEEP_INTERVAL=30
+      - WAIT_HOST_CONNECT_TIMEOUT=30
+  uisimulatorservice:
+    image: prabhatkumar/uisimulatorservice:Latest
+    hostname: uisimulatorservice
+    container_name: uisimulatorservice
+    ports:
+     - 5000:5000
+    restart: on-failure 
+    command: sh -c "/wait && java -jar UI-Simulator-0.0.1-SNAPSHOT.jar"
     environment:
       - WAIT_HOSTS=eurekaservice:9001, configservice:9000
       - WAIT_HOSTS_TIMEOUT=300

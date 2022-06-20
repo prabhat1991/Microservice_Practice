@@ -45,7 +45,8 @@ spring:
                                classpath:config/licensingservice, 
                                classpath:config/organizationservice, 
                                classpath:config/authorizationservice,
-                               classpath:config/zuulservice
+                               classpath:config/zuulservice,
+                               classpath:config/uisimulatorservice
 
 eureka:
   instance:
