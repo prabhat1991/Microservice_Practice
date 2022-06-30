@@ -31,7 +31,7 @@
 ####
 
 server:
-   port: 9000
+   port: 10000
 spring:
   profiles:
     active: native
@@ -55,7 +55,7 @@ eureka:
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl:
-      defaultZone: http://eurekaservice:9001/eureka/
+      defaultZone: http://localhost:10001/eureka/
 
 #Setting logging levels
 logging:

@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: licensingservice
+  profiles:
+    active:
+      docker
+  cloud:
+    config:
+      enabled: true
+      uri: http://configservice:9000
+#      discovery:
+#        enabled: true
+#        serviceId: configserver

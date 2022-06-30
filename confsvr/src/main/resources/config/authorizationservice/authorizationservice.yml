@@ -1,5 +1,5 @@
 server:
-  port: 9003
+  port: 10003
   contextPath: /auth
 spring:
   jpa:
@@ -13,7 +13,7 @@ spring:
   datasource:
     platform: postgres
     driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://postgresSecurityDB:5432/securityDB
+    url: jdbc:postgresql://localhost:5431/securityDB
     username: postgres
     password: postgres
     testWhileIdle: 'true'
@@ -32,4 +32,4 @@ eureka:
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl:
-        defaultZone: http://eurekaservice:9001/eureka/
+        defaultZone: http://localhost:10001/eureka/

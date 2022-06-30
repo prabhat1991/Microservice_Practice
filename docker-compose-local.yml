@@ -1,0 +1,26 @@
+version: '3'
+services:
+  postgresTestDB:
+    image: postgres
+    environment:
+      - POSTGRES_DB=testDB
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 5432:5432
+    restart: on-failure
+  postgresSecurityDB:
+    image: postgres
+    environment:
+      - POSTGRES_DB=securityDB
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 5431:5432
+    restart: on-failure
+  rabbitMQ:
+    image: rabbitmq:3-management
+    ports:
+      - 5672:5672
+      - 15672:15672
+    restart: on-failure

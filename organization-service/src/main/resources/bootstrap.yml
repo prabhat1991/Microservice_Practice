@@ -7,4 +7,4 @@ spring:
   cloud:
     config:
       enabled: true
-      uri: http://configservice:9000
+      uri: http://localhost:10000

@@ -1,5 +1,5 @@
 server:
-  port: 9002
+  port: 10002
 
   #Setting logging levels
 logging:
@@ -15,7 +15,7 @@ eureka:
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl:
-        defaultZone: http://eurekaservice:9001/eureka/
+        defaultZone: http://localhost:10001/eureka/
 
 #
 #  debug:
@@ -24,12 +24,12 @@ eureka:
 security:
   oauth2:
     resource:
-      token-info-uri: http://authorizationservice:9003/auth/oauth/check_token
+      token-info-uri: http://localhost:10003/auth/oauth/check_token
     client:
       client-id: client
       client-secret: pass
-      user-authorization-uri: http://authorizationservice:9003/auth/oauth/authorize
-      access-token-uri: http://authorizationservice:9003/auth/oauth/token
+      user-authorization-uri: http://localhost:10003/auth/oauth/authorize
+      access-token-uri: http://localhost:10003/auth/oauth/token
       
 zuul:
   prefix:  /api

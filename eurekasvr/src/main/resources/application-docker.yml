@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: eurekaservice
+  profiles: docker    
+server:
+  port: 9001
+
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    service-url:
+      defaultZone: http://eurekaservice:9001/eureka
+  server:
+    waitTimeInMsWhenSyncEmpty: 5
+     
+
+
+#Setting logging levels
+logging:
+  level:
+    com.netflix: WARN
+    org.springframework.web: WARN
+    com.thoughtmechanix: DEBUG

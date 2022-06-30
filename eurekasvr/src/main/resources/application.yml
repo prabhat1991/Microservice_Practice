@@ -1,16 +1,17 @@
 spring:
   application:
     name: eurekaservice
-    
+  profiles:
+    active: default    
 server:
-  port: 9001
+  port: 10001
 
 eureka:
   client:
     registerWithEureka: false
     fetchRegistry: false
     service-url:
-      defaultZone: http://eurekaservice:9001/eureka
+      defaultZone: http://localhost:10001/eureka
   server:
     waitTimeInMsWhenSyncEmpty: 5
      

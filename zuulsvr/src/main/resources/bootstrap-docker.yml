@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: zuulservice
+  profiles:
+    active:
+      docker
+  cloud:
+    config:
+      enabled: true
+      uri: http://configservice:9000

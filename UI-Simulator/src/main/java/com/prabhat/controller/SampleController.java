@@ -47,7 +47,7 @@ public class SampleController {
 		httpHeaders.add("Authorization", AccessToken.getAccessToken());
 		HttpEntity<License> licenseHttpEntity = new HttpEntity<License>(license, httpHeaders);
 
-		String uri = String.format("http://localhost:8081/v1/licenses/", license.getOrganizationId());
+		String uri = String.format("http://LICENSINGSERVICE/v1/licenses/", license.getOrganizationId());
 		try {
 			ResponseEntity<Void> responseEntity = restTemplate.exchange(uri, HttpMethod.POST, licenseHttpEntity, Void.class);
 			model.addAttribute("licenseAdded", true);
@@ -68,7 +68,7 @@ public class SampleController {
         httpHeaders.add("Authorization", AccessToken.getAccessToken());
         HttpEntity<License> licenseHttpEntity = new HttpEntity<License>(httpHeaders);
         try {
-            ResponseEntity<License[]> responseEntity = restTemplate.exchange("http://localhost:8081/v1/licenses/", HttpMethod.GET, licenseHttpEntity, License[].class);
+            ResponseEntity<License[]> responseEntity = restTemplate.exchange("http://LICENSINGSERVICE/v1/licenses/", HttpMethod.GET, licenseHttpEntity, License[].class);
             model.addAttribute("licenses", responseEntity.getBody());
         } catch (HttpStatusCodeException e) {
             ResponseEntity responseEntity = ResponseEntity.status(e.getRawStatusCode()).headers(e.getResponseHeaders()).body(e.getResponseBodyAsString());
