@@ -9,8 +9,8 @@
 --  roles VARCHAR(100) NOT NULL, 
 --  PRIMARY KEY (username));
 
-INSERT INTO users(id, username,password,active, roles) VALUES (1,'john.carnell','pass1', true, 'Role_USER');
-INSERT INTO users(id, username,password,active, roles) VALUES (2,'william.woodward','pass2', true, 'Role_ADMIN');
+INSERT INTO users(id, username,password,active, roles) VALUES (1,'john.carnell','pass1', true, 'Role_USER') ON CONFLICT (id) DO NOTHING;
+INSERT INTO users(id, username,password,active, roles) VALUES (2,'william.woodward','pass2', true, 'Role_ADMIN') ON CONFLICT (id) DO NOTHING
 
 --INSERT INTO user_roles (user_name, role) VALUES ('john.carnell', 'ROLE_USER');
 --INSERT INTO user_roles (user_name, role) VALUES ('william.woodward', 'ROLE_ADMIN');

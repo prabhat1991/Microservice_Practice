@@ -18,9 +18,9 @@ services:
     ports:
       - 5431:5432
     restart: on-failure
-  rabbitMQ:
-    image: rabbitmq:3-management
-    ports:
-      - 5672:5672
-      - 15672:15672
-    restart: on-failure
+  # rabbitMQ:
+  #   image: rabbitmq:3-management
+  #   ports:
+  #     - 5672:5672
+  #     - 15672:15672
+  #   restart: on-failure

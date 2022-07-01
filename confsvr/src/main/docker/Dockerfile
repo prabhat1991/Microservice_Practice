@@ -9,4 +9,4 @@ EXPOSE 9000
 ENV WAIT_VERSION 2.7.2
 ADD https://github.com/ufoscout/docker-compose-wait/releases/download/$WAIT_VERSION/wait /wait
 RUN chmod +x /wait
-#ENTRYPOINT ["java", "-jar", "@project.build.finalName@.jar"]
+ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=docker", "@project.build.finalName@.jar"]
