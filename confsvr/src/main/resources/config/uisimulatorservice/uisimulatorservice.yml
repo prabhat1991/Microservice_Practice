@@ -10,10 +10,10 @@ security:
     client:
       client-id: client
       client-secret: pass
-      user-authorization-uri: http://localhost:10003/auth/oauth/authorize
-      access-token-uri: http://localhost:10003/auth/oauth/token
+      userAuthorizationUri: http://localhost:10003/auth/oauth/authorize
+      accessTokenUri: http://localhost:10003/auth/oauth/token
     resource:
-      token-info-uri: http://localhost:10003/auth/oauth/check_token
+      tokenInfoUri: http://localhost:10003/auth/oauth/check_token
 
 eureka:
   instance:

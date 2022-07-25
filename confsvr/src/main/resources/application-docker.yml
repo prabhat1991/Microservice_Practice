@@ -9,7 +9,7 @@ spring:
           uri: https://github.com/prabhat1991/Microservice_Practice_Config_Repo
           search-paths: authorizationservice,licensingservice,organizationservice,uisimulatorservice,zuulservice
           username: prabhat991
-          password: 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
+          password: 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
 eureka:
   instance:
     preferIpAddress: true

@@ -1,19 +1,19 @@
 server:
   port: 5000
-#  servlet:
-#    session:
-#      cookie:
-#        name: KSESSION  
+  servlet:
+    session:
+      cookie:
+        name: APPSESSION  
 
 security:
   oauth2:
     client:
       client-id: client
       client-secret: pass
-      user-authorization-uri: http://localhost:9003/auth/oauth/authorize
-      access-token-uri: http://localhost:9003/auth/oauth/token
+      userAuthorizationUri: http://localhost:9003/auth/oauth/authorize
+      accessTokenUri: http://localhost:9003/auth/oauth/token
     resource:
-      token-info-uri: http://localhost:9003/auth/oauth/check_token
+      tokenInfoUri: http://localhost:9003/auth/oauth/check_token
 
 eureka:
   instance:
@@ -23,3 +23,11 @@ eureka:
     fetchRegistry: true
     serviceUrl:
         defaultZone: http://eurekaservice:9001/eureka/
+
+logging:
+  level:
+    root: INFO
+    com.netflix: WARN
+    org.springframework.web: WARN
+    com.thoughtmechanix: DEBUG
+    org.springframework.security: INFO

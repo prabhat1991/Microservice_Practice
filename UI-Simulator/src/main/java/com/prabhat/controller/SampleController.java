@@ -1,5 +1,7 @@
 package com.prabhat.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -16,6 +18,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.prabhat.config.AccessToken;
 import com.prabhat.model.License;
+import com.prabhat.service.LicenseSerivce;
 
 @Controller
 public class SampleController {
@@ -23,6 +26,9 @@ public class SampleController {
 	@Autowired
     RestTemplate restTemplate;
 
+	@Autowired
+	private LicenseSerivce licenseSerivce;
+	
 	@RequestMapping(value = "/")
 	public String loadUI() {
 		return "home";
@@ -62,21 +68,18 @@ public class SampleController {
 	}
 	
 	@RequestMapping(value = "/license", method = RequestMethod.GET)
-    public String loadLicenses(Model model) {
+	public String loadLicenses(Model model) {
 
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add("Authorization", AccessToken.getAccessToken());
-        HttpEntity<License> licenseHttpEntity = new HttpEntity<License>(httpHeaders);
-        try {
-            ResponseEntity<License[]> responseEntity = restTemplate.exchange("http://LICENSINGSERVICE/v1/licenses/", HttpMethod.GET, licenseHttpEntity, License[].class);
-            model.addAttribute("licenses", responseEntity.getBody());
-        } catch (HttpStatusCodeException e) {
-            ResponseEntity responseEntity = ResponseEntity.status(e.getRawStatusCode()).headers(e.getResponseHeaders()).body(e.getResponseBodyAsString());
-            model.addAttribute("error", responseEntity);
-        } catch (Exception e) {
-            ResponseEntity responseEntity = ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(e.getMessage());
-            model.addAttribute("error", responseEntity);
-        }
-        return "secure";
-    }
+		try {
+			List<License> licenses = licenseSerivce.loadLicenses("feign");
+			model.addAttribute("licenses", licenses);
+		} catch (HttpStatusCodeException e) {
+			ResponseEntity responseEntity = ResponseEntity.status(e.getRawStatusCode()).headers(e.getResponseHeaders()).body(e.getResponseBodyAsString());
+			model.addAttribute("error", responseEntity);
+		} catch (Exception e) {
+			ResponseEntity responseEntity = ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(e.getMessage());
+			model.addAttribute("error", responseEntity);
+		}
+		return "secure";
+	}
 }
