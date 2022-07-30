@@ -32,6 +32,9 @@ security:
       access-token-uri: http://localhost:10003/auth/oauth/token
       
 zuul:
+  debug:
+    requests: true
+  ignored-services: "*"
   prefix:  /api
   routes:
     organizationservice: /organization/**

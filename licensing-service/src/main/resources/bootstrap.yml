@@ -17,3 +17,7 @@ spring:
 #      discovery:
 #        enabled: true
 #        serviceId: configserver
+
+logging:
+  path: ../logs
+  file: ${logging.path}/${spring.application.name}.log

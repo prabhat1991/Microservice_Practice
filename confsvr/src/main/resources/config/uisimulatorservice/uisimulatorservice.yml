@@ -5,6 +5,10 @@ server:
 #      cookie:
 #        name: KSESSION  
 
+zuulService:
+  licensingserviceUrl: http://zuulservice/api/licensing
+  organizationserviceUrl: http://zuulservice/api/organization
+
 security:
   oauth2:
     client:

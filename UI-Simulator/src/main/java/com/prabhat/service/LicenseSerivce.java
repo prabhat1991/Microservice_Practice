@@ -24,7 +24,7 @@ public class LicenseSerivce {
 	private LicenseDiscoveryClient licenseDiscoveryClient;
 
 	public List<License> loadLicenses(String clientType) {
-		
+
 		List<License> licenseList = null;
 
 		switch (clientType) {
@@ -44,5 +44,25 @@ public class LicenseSerivce {
 			licenseList = licenseRestClient.loadLicenses();
 		}
 		return licenseList;
+	}
+
+	public void saveLicense(License license, String clientType) {
+
+		switch (clientType) {
+		case "feign":
+			System.out.println("I am using the feign client");
+			licenseFeignClient.saveLicenses(license, AccessToken.getAccessToken());
+			break;
+		case "rest":
+			System.out.println("I am using the rest client");
+			licenseRestClient.saveLicense(license);
+			break;
+		case "discovery":
+			System.out.println("I am using the discovery client");
+			licenseDiscoveryClient.saveLicense(license);
+			break;
+		default:
+			licenseRestClient.saveLicense(license);
+		}
 	}
 }

@@ -1,13 +1,16 @@
 package com.prabhat.zuulsvr.filters;
 
-import com.netflix.zuul.ZuulFilter;
-import com.netflix.zuul.context.RequestContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
 import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.io.CharStreams;
+import com.netflix.zuul.ZuulFilter;
+import com.netflix.zuul.context.RequestContext;
 
 @Component
 public class AuthTokenFilter extends ZuulFilter{
@@ -43,11 +46,19 @@ public class AuthTokenFilter extends ZuulFilter{
     }
 
     public Object run() {
-    	OAuth2AuthenticationDetails authDetails = (OAuth2AuthenticationDetails)SecurityContextHolder.getContext().getAuthentication().getDetails();
-    	filterUtils.forwardAuthToken(authDetails.getTokenType().concat(" ").concat(authDetails.getTokenValue()));
-    	
-        RequestContext ctx = RequestContext.getCurrentContext();
-        logger.debug(String.format("Processing incoming request for {}.",  ctx.getRequest().getRequestURI()));
-        return null;
+    	try {
+    		OAuth2AuthenticationDetails authDetails = (OAuth2AuthenticationDetails)SecurityContextHolder.getContext().getAuthentication().getDetails();
+    		filterUtils.forwardAuthToken(authDetails.getTokenType().concat(" ").concat(authDetails.getTokenValue()));
+
+    		RequestContext ctx = RequestContext.getCurrentContext();
+    		logger.info("Processing incoming request for {}",  ctx.getRequest().getRequestURI());
+    		if (ctx.getRequest().getContentLength() > 0 ) {
+    			ObjectMapper mapper = new ObjectMapper();
+    			logger.info("Incoming request for {}",  mapper.writeValueAsString(CharStreams.toString(ctx.getRequest().getReader())));
+    		}
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
+    	return null;
     }
 }

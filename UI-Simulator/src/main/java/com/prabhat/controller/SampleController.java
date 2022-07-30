@@ -48,14 +48,8 @@ public class SampleController {
 	
 	@RequestMapping(value = "/license", method = RequestMethod.POST)
 	public String addlicense(@ModelAttribute("license") License license, Model model) {
-		
-		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.add("Authorization", AccessToken.getAccessToken());
-		HttpEntity<License> licenseHttpEntity = new HttpEntity<License>(license, httpHeaders);
-
-		String uri = String.format("http://LICENSINGSERVICE/v1/licenses/", license.getOrganizationId());
 		try {
-			ResponseEntity<Void> responseEntity = restTemplate.exchange(uri, HttpMethod.POST, licenseHttpEntity, Void.class);
+			licenseSerivce.saveLicense(license, "rest");
 			model.addAttribute("licenseAdded", true);
 		} catch (HttpStatusCodeException e) {
 			ResponseEntity responseEntity = ResponseEntity.status(e.getRawStatusCode()).headers(e.getResponseHeaders()).body(e.getResponseBodyAsString());
@@ -71,7 +65,7 @@ public class SampleController {
 	public String loadLicenses(Model model) {
 
 		try {
-			List<License> licenses = licenseSerivce.loadLicenses("feign");
+			List<License> licenses = licenseSerivce.loadLicenses("rest");
 			model.addAttribute("licenses", licenses);
 		} catch (HttpStatusCodeException e) {
 			ResponseEntity responseEntity = ResponseEntity.status(e.getRawStatusCode()).headers(e.getResponseHeaders()).body(e.getResponseBodyAsString());
