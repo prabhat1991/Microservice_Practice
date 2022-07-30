@@ -1,0 +1,33 @@
+server:
+  port: 5000
+  servlet:
+    session:
+      cookie:
+        name: APPSESSION  
+
+security:
+  oauth2:
+    client:
+      client-id: client
+      client-secret: pass
+      userAuthorizationUri: http://localhost:9003/auth/oauth/authorize
+      accessTokenUri: http://localhost:9003/auth/oauth/token
+    resource:
+      tokenInfoUri: http://localhost:9003/auth/oauth/check_token
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+        defaultZone: http://eurekaservice:9001/eureka/
+
+logging:
+  level:
+    root: INFO
+    com.netflix: WARN
+    org.springframework.web: WARN
+    com.thoughtmechanix: DEBUG
+    org.springframework.security: INFO

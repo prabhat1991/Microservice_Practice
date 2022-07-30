@@ -1,0 +1,29 @@
+server:
+  port: 4000
+#  servlet:
+#    session:
+#      cookie:
+#        name: KSESSION  
+
+zuulService:
+  licensingserviceUrl: http://zuulservice/api/licensing
+  organizationserviceUrl: http://zuulservice/api/organization
+
+security:
+  oauth2:
+    client:
+      client-id: client
+      client-secret: pass
+      userAuthorizationUri: http://localhost:10003/auth/oauth/authorize
+      accessTokenUri: http://localhost:10003/auth/oauth/token
+    resource:
+      tokenInfoUri: http://localhost:10003/auth/oauth/check_token
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+        defaultZone: http://localhost:10001/eureka/

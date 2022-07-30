@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgress-testdb-deploy
+  labels:
+    db: postgress-testdb
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      db: postgress-testdb
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        db: postgress-testdb
+    spec:
+      containers:
+       - name: postgres-testdb-pod
+         image: postgres
+         ports:
+          - containerPort: 5432
+         env:
+          - name: POSTGRES_DB
+            value: testDB
+          - name: POSTGRES_USER
+            value: postgres
+          - name: POSTGRES_PASSWORD
+            value: postgres
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgress-testdb-service
+  labels:
+    app: postgress-testdb-service
+spec:
+  type: NodePort
+  selector:
+    db: postgress-testdb
+  ports:
+    - port: 5432
+      targetPort: 5432

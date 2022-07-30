@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: organizationservice
+  profiles:
+    active:
+      docker
+  cloud:
+    config:
+      enabled: true
+      uri: http://configservice:9000
+      fail-fast: true
+      retry:
+        # retry configuration retrieval up to 100 times
+        max-attempts: 30
+        # max backoff interval
+        max-interval: 8000

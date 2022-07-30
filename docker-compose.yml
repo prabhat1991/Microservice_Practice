@@ -1,0 +1,80 @@
+version: '3'
+services:
+  postgresTestDB:
+    image: postgres
+    environment:
+      - POSTGRES_DB=testDB
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 5432:5432
+    restart: unless-stopped
+  postgresSecurityDB:
+    image: postgres
+    environment:
+      - POSTGRES_DB=securityDB
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 5431:5432
+    restart: unless-stopped
+  eurekaservice:
+    image: prabhatkumar/eurekaservice:Latest
+    hostname: eurekaservice
+    container_name: eurekaservice
+    ports:
+     - 9001:9001
+    restart: unless-stopped
+    # command: sh -c "java -jar  -Dspring.profiles.active=docker eurekasvr-0.0.1-SNAPSHOT.jar"
+  configservice:
+    image: prabhatkumar/configservice:Latest
+    hostname: configservice
+    container_name: configservice
+    ports:
+     - 9000:9000
+    restart: unless-stopped 
+    # command: sh -c "/wait && java -jar  -Dspring.profiles.active=docker configurationserver-0.0.1-SNAPSHOT.jar"
+    # environment:
+    #   - WAIT_HOSTS=eurekaservice:9001
+    #   - WAIT_HOSTS_TIMEOUT=300
+    #   - WAIT_SLEEP_INTERVAL=30
+    #   - WAIT_HOST_CONNECT_TIMEOUT=30 
+  authorizationservice:
+    image: prabhatkumar/authorizationservice:Latest
+    hostname: authorizationservice
+    container_name: authorizationservice
+    ports:
+     - 9003:9003
+    restart: unless-stopped 
+    # command: sh -c "/wait && java -jar -Dspring.profiles.active=docker authorization-service-0.0.1-SNAPSHOT.jar"
+    # environment:
+    #   - WAIT_HOSTS=eurekaservice:9001, configservice:9000
+    #   - WAIT_HOSTS_TIMEOUT=300
+    #   - WAIT_SLEEP_INTERVAL=30
+    #   - WAIT_HOST_CONNECT_TIMEOUT=30
+  licensingservice:
+    image: prabhatkumar/licensingservice:Latest
+    hostname: licensingservice
+    container_name: licensingservice
+    ports:
+     - 8081:8081 
+    restart: unless-stopped 
+    # command: sh -c "/wait && java -jar licensing-service-0.0.1-SNAPSHOT.jar"
+    # environment:
+    #   - WAIT_HOSTS=eurekaservice:9001, configservice:9000
+    #   - WAIT_HOSTS_TIMEOUT=300
+    #   - WAIT_SLEEP_INTERVAL=30
+    #   - WAIT_HOST_CONNECT_TIMEOUT=30
+  uisimulatorservice:
+    image: prabhatkumar/uisimulatorservice:Latest
+    hostname: uisimulatorservice
+    container_name: uisimulatorservice
+    ports:
+     - 5000:5000
+    restart: unless-stopped 
+    # command: sh -c "/wait && java -jar UI-Simulator-0.0.1-SNAPSHOT.jar"
+    # environment:
+    #   - WAIT_HOSTS=eurekaservice:9001, configservice:9000
+    #   - WAIT_HOSTS_TIMEOUT=300
+    #   - WAIT_SLEEP_INTERVAL=30
+    #   - WAIT_HOST_CONNECT_TIMEOUT=30

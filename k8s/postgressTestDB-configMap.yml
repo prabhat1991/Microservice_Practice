@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgressTestDB-configMap
+  labels:
+    db: postgress-testDB
+  data:
+    POSTGRES_DB: testDB
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: postgres

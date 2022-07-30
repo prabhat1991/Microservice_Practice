@@ -1,0 +1,25 @@
+server:
+  port: 9000
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          default-label: main
+          uri: https://github.com/prabhat1991/Microservice_Practice_Config_Repo
+          search-paths: authorizationservice,licensingservice,organizationservice,uisimulatorservice,zuulservice
+          username: prabhat991
+          password: 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
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://eurekaservice:9001/eureka/
+logging:
+  level:
+    com.netflix: WARN
+    org.springframework.web: WARN
+    com.thoughtmechanix: DEBUG

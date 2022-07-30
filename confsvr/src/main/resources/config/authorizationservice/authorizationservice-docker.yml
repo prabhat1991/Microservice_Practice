@@ -1,0 +1,41 @@
+server:
+  port: 9003
+  contextPath: /auth
+  servlet:
+    session:
+      cookie:
+        name: KSESSION
+spring:
+  jpa:
+    database: POSTGRESQL
+    show-sql: 'true'
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+  datasource:
+    platform: postgres
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://postgresSecurityDB:5432/securityDB
+    username: postgres
+    password: postgres
+    testWhileIdle: 'true'
+    validationQuery: SELECT 1
+
+#Setting the logging levels for the service
+logging:
+  level:
+    root: DEBUG
+    com.netflix: WARN
+    org.springframework.web: WARN
+    com.thoughtmechanix: DEBUG
+    org.springframework.security: DEBUG
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+        defaultZone: http://eurekaservice:9001/eureka/

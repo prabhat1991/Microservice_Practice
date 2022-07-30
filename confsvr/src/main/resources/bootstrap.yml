@@ -1,3 +1,5 @@
 spring:
   application:
-    name: configserver
+    name: configservice
+  profiles:
+    active: native

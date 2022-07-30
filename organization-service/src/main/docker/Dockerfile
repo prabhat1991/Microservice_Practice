@@ -1,7 +1,12 @@
 FROM openjdk:8-jdk-alpine
 RUN  apk update && apk upgrade && apk add netcat-openbsd
 RUN mkdir -p /usr/local/organizationservice
-ADD @project.build.finalName@.jar /usr/local/organizationservice/
-ADD run.sh run.sh
-RUN chmod +x run.sh
-CMD ./run.sh
+WORKDIR /usr/local/organizationservice
+ADD @project.build.finalName@.jar .
+EXPOSE 8082
+#ADD wait-for.sh .
+#RUN chmod +x wait-for.sh
+ENV WAIT_VERSION 2.7.2
+ADD https://github.com/ufoscout/docker-compose-wait/releases/download/$WAIT_VERSION/wait /wait
+RUN chmod +x /wait
+ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=docker", "@project.build.finalName@.jar"]

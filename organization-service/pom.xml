@@ -4,12 +4,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.thoughtmechanix</groupId>
+	<groupId>com.prabhat</groupId>
 	<artifactId>organization-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>Eagle Eye Organization Service</name>
+	<name>Organization Service</name>
 	<description>Organization Service</description>
 
 	<parent>
@@ -61,20 +61,19 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-security</artifactId>
 		</dependency>
-
+		<dependency>
+	      <groupId>org.springframework.retry</groupId>
+	      <artifactId>spring-retry</artifactId>
+	    </dependency>
 		<dependency>
 			<groupId>org.springframework.security.oauth</groupId>
 			<artifactId>spring-security-oauth2</artifactId>
 		</dependency>
 
 		<dependency>
-			<groupId>postgresql</groupId>
+			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
-			<version>9.1-901.jdbc4</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-rsa</artifactId>
+			<version>42.2.24</version>
 		</dependency>
 	</dependencies>
 
@@ -82,9 +81,9 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<start-class>com.thoughtmechanix.organization.Application</start-class>
-		<docker.image.name>johncarnell/tmx-organization-service</docker.image.name>
-		<docker.image.tag>chapter4</docker.image.tag>
+		<!-- <start-class>com.prabhat.organization.Application</start-class> -->
+		<docker.image.name>prabhatkumar/organizationservice</docker.image.name>
+		<docker.image.tag>${env.BUILD_NAME}</docker.image.tag>
 	</properties>
 
 	<build>
@@ -129,6 +128,15 @@
 						</resource>
 					</resources>
 				</configuration>
+				<executions>
+             	<execution>
+             		<id>default</id>
+             		<phase>install</phase>
+             		<goals>
+             			<goal>build</goal>
+             		</goals>
+             	</execution>
+             </executions>
 			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

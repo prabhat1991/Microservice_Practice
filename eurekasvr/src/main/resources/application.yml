@@ -1,16 +1,17 @@
 spring:
   application:
-    name: eureka-Server
-    
+    name: eurekaservice
+  profiles:
+    active: default    
 server:
-  port: 9001
+  port: 10001
 
 eureka:
   client:
-    registerWithEureka: true
-    fetchRegistry: true
+    registerWithEureka: false
+    fetchRegistry: false
     service-url:
-      defaultZone: http://localhost:9001/eureka
+      defaultZone: http://localhost:10001/eureka
   server:
     waitTimeInMsWhenSyncEmpty: 5
      
@@ -22,3 +23,5 @@ logging:
     com.netflix: WARN
     org.springframework.web: WARN
     com.thoughtmechanix: DEBUG
+  path: ../logs
+  file: ${logging.path}/${spring.application.name}.log

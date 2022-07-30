@@ -1,11 +1,12 @@
 server:
-  port: 9003
+  port: 10003
+  contextPath: /auth
 spring:
   jpa:
     database: POSTGRESQL
     show-sql: 'true'
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     properties:
       hibernate:
       dialect: org.hibernate.dialect.PostgreSQLDialect
@@ -17,3 +18,19 @@ spring:
     password: postgres
     testWhileIdle: 'true'
     validationQuery: SELECT 1
+
+#Setting the logging levels for the service
+logging:
+  level:
+    com.netflix: WARN
+    org.springframework.web: WARN
+    com.thoughtmechanix: DEBUG
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+        defaultZone: http://localhost:10001/eureka/

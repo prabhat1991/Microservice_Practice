@@ -31,7 +31,7 @@
 ####
 
 server:
-   port: 9000
+   port: 10000
 spring:
   profiles:
     active: native
@@ -41,7 +41,12 @@ spring:
            native:
 #              searchLocations: file://confsvr/src/main/resources/config/licensingservice,
 #                               file://confsvr/src/main/resources/config/organizationservice
-              searchLocations: classpath:config/,classpath:config/licensingservice, classpath:config/organizationservice, classpath:config/authorizationservice
+              searchLocations: classpath:config/,
+                               classpath:config/licensingservice, 
+                               classpath:config/organizationservice, 
+                               classpath:config/authorizationservice,
+                               classpath:config/zuulservice,
+                               classpath:config/uisimulatorservice
 
 eureka:
   instance:
@@ -50,7 +55,7 @@ eureka:
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl:
-      defaultZone: http://localhost:9001/eureka/
+      defaultZone: http://localhost:10001/eureka/
 
 #Setting logging levels
 logging:
@@ -58,3 +63,5 @@ logging:
     com.netflix: WARN
     org.springframework.web: WARN
     com.thoughtmechanix: DEBUG
+  path: ../logs
+  file: ${logging.path}/${spring.application.name}.log

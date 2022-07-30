@@ -1,0 +1,38 @@
+server:
+  port: 9002
+
+  #Setting logging levels
+logging:
+    level:
+      com.netflix: WARN
+      org.springframework.web: WARN
+      com.thoughtmechanix: DEBUG
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+        defaultZone: http://eurekaservice:9001/eureka/
+
+#
+#  debug:
+#    request: true
+#
+security:
+  oauth2:
+    resource:
+      token-info-uri: http://authorizationservice:9003/auth/oauth/check_token
+    client:
+      client-id: client
+      client-secret: pass
+      user-authorization-uri: http://authorizationservice:9003/auth/oauth/authorize
+      access-token-uri: http://authorizationservice:9003/auth/oauth/token
+      
+zuul:
+  prefix:  /api
+  routes:
+    organizationservice: /organization/**
+    licensingservice: /licensing/**

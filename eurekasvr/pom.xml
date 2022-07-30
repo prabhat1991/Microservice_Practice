@@ -2,7 +2,7 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.thoughtmechanix</groupId>
+  <groupId>com.prabhat</groupId>
   <artifactId>eurekasvr</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
@@ -37,9 +37,9 @@
   <!--Docker build Config-->
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <start-class>com.thoughtmechanix.eurekasvr.EurekaServerApplication</start-class>
+    <!-- <start-class>com.prabhat.eurekasvr.EurekaServerApplication</start-class> -->
     <java.version>1.8</java.version>
-    <docker.image.name>johncarnell/tmx-eurekasvr</docker.image.name>
+    <docker.image.name>prabhatkumar/eurekaservice</docker.image.name>
     <docker.image.tag>${env.BUILD_NAME}</docker.image.tag>
   </properties>
 
@@ -84,6 +84,15 @@
                      </resource>
                  </resources>
              </configuration>
+             <executions>
+             	<execution>
+             		<id>default</id>
+             		<phase>install</phase>
+             		<goals>
+             			<goal>build</goal>
+             		</goals>
+             	</execution>
+             </executions>
          </plugin>
          <plugin>
              <groupId>org.springframework.boot</groupId>
