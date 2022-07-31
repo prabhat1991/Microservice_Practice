@@ -3,12 +3,14 @@ server:
 #  servlet:
 #    session:
 #      cookie:
-#        name: KSESSION  
+#        name: KSESSION 
 
-zuulService:
-  licensingserviceUrl: http://zuulservice/api/licensing
-  organizationserviceUrl: http://zuulservice/api/organization
-
+serviceConfig:
+  jwtEnabled: true
+  signingKey: 'secret'
+  zuulLicensingserviceUrl: http://zuulservice/api/licensing
+  zuulOrganizationserviceUrl: http://zuulservice/api/organization
+  
 security:
   oauth2:
     client:

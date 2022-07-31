@@ -1,4 +1,4 @@
-package com.prabhat.licenses.config;
+package com.prabhat.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;

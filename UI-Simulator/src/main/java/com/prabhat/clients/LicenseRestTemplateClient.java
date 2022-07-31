@@ -1,9 +1,8 @@
-package com.prabhat.clients.licenses;
+package com.prabhat.clients;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -11,17 +10,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import com.prabhat.config.AccessToken;
+import com.prabhat.config.ServiceConfig;
 import com.prabhat.model.License;
+import com.prabhat.security.AccessToken;
 
 @Component
 public class LicenseRestTemplateClient {
 	
-	@Value("${zuulService.organizationserviceUrl}")
-	private String organizationUrl;
-	
-	@Value("${zuulService.licensingserviceUrl}")
-	private String licensingserviceUrl;
+	@Autowired
+	private ServiceConfig serviceConfig;
 	
     @Autowired
     RestTemplate restTemplate;
@@ -31,7 +28,7 @@ public class LicenseRestTemplateClient {
     	HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.add("Authorization", AccessToken.getAccessToken());
 		HttpEntity<License> licenseHttpEntity = new HttpEntity<License>(httpHeaders);
-		ResponseEntity<List> responseEntity = restTemplate.exchange(licensingserviceUrl.concat("/v1/licenses/"), HttpMethod.GET, licenseHttpEntity, List.class);
+		ResponseEntity<List> responseEntity = restTemplate.exchange(serviceConfig.getZuulLicensingserviceUrl().concat("/v1/licenses/"), HttpMethod.GET, licenseHttpEntity, List.class);
         return responseEntity.getBody();
     	
     }
@@ -40,7 +37,7 @@ public class LicenseRestTemplateClient {
     	HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.add("Authorization", AccessToken.getAccessToken());
 		HttpEntity<License> licenseHttpEntity = new HttpEntity<License>(license, httpHeaders);
-		String uri = String.format(licensingserviceUrl.concat("/v1/licenses/"), license.getOrganizationId());
+		String uri = String.format(serviceConfig.getZuulLicensingserviceUrl().concat("/v1/licenses/"), license.getOrganizationId());
 		restTemplate.exchange(uri, HttpMethod.POST, licenseHttpEntity, Void.class);
     	
     }

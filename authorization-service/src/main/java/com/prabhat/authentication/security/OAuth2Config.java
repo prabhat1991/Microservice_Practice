@@ -1,5 +1,7 @@
 package com.prabhat.authentication.security;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -8,15 +10,33 @@ import org.springframework.security.oauth2.config.annotation.configurers.ClientD
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.token.TokenEnhancer;
+import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
+import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+
+import com.prabhat.authentication.config.ServiceConfig;
 
 @Configuration
 public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
-
+	
+	@Autowired
+	private ServiceConfig serviceConfig;
+	
     @Autowired
     private AuthenticationManager authenticationManager;
     
     @Autowired
     private UserDetailsService userDetailsService;
+    
+    @Autowired
+    private TokenStore tokenStore;
+
+    @Autowired
+    private JwtAccessTokenConverter jwtAccessTokenConverter;
+
+    @Autowired
+    private TokenEnhancer jwtTokenEnhancer;
     
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
@@ -25,16 +45,26 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        endpoints.authenticationManager(authenticationManager)
-        .userDetailsService(userDetailsService);
+    	
+    	if(serviceConfig.isJwtEnabled()) {
+    		TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
+            tokenEnhancerChain.setTokenEnhancers(Arrays.asList(jwtTokenEnhancer, jwtAccessTokenConverter));
+
+            endpoints.tokenStore(tokenStore)                             
+                     .accessTokenConverter(jwtAccessTokenConverter)       
+                     .tokenEnhancer(tokenEnhancerChain)                   
+                     .authenticationManager(authenticationManager)
+                     .userDetailsService(userDetailsService);
+    	}else {
+    		endpoints.authenticationManager(authenticationManager)
+    				 .userDetailsService(userDetailsService);
+    	}
     }
 
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-
     	//authorization_code is required when performing Auth2SSo from UI-Simulator
-    	
         clients.inMemory()
                 .withClient("client")
                 .secret("pass")

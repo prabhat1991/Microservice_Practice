@@ -1,4 +1,4 @@
-package com.prabhat.config;
+package com.prabhat.security;
 
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.context.annotation.Configuration;

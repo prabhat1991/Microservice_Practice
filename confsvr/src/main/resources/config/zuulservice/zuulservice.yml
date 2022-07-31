@@ -8,6 +8,10 @@ logging:
       org.springframework.web: WARN
       com.thoughtmechanix: DEBUG
 
+serviceConfig:
+  jwtEnabled: true
+  signingKey: 'secret'
+  
 eureka:
   instance:
     preferIpAddress: true

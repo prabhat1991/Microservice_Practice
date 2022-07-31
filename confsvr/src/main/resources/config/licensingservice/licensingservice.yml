@@ -20,6 +20,12 @@ spring:
     testWhileIdle: 'true'
     validationQuery: SELECT 1
     
+serviceConfig:
+  jwtEnabled: true
+  signingKey: 'secret'
+  zuulLicensingserviceUrl: http://zuulservice/api/licensing
+  zuulOrganizationserviceUrl: http://zuulservice/api/organization
+    
 eureka:
   instance:
     preferIpAddress: true

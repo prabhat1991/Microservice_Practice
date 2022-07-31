@@ -5,11 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.prabhat.clients.licenses.LicenseDiscoveryClient;
-import com.prabhat.clients.licenses.LicenseFeignClient;
-import com.prabhat.clients.licenses.LicenseRestTemplateClient;
-import com.prabhat.config.AccessToken;
+import com.prabhat.clients.LicenseDiscoveryClient;
+import com.prabhat.clients.LicenseFeignClient;
+import com.prabhat.clients.LicenseRestTemplateClient;
 import com.prabhat.model.License;
+import com.prabhat.security.AccessToken;
 
 @Service
 public class LicenseSerivce {

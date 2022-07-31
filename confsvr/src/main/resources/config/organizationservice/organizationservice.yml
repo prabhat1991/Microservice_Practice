@@ -20,7 +20,11 @@ spring:
     password: postgres
     testWhileIdle: 'true'
     validationQuery: SELECT 1
-    
+ 
+serviceConfig:
+  jwtEnabled: true
+  signingKey: 'secret'
+     
 eureka:
   instance:
     preferIpAddress: true

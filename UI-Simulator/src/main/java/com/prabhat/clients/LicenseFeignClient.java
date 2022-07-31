@@ -1,4 +1,4 @@
-package com.prabhat.clients.licenses;
+package com.prabhat.clients;
 
 
 import java.util.List;

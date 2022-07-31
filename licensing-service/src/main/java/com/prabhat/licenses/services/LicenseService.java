@@ -25,7 +25,6 @@ public class LicenseService {
     @Autowired
     ServiceConfig config;
 
-
     @Autowired
     OrganizationFeignClient organizationFeignClient;
 
@@ -61,15 +60,12 @@ public class LicenseService {
 
     public License getLicense(String organizationId,String licenseId, String clientType) {
         License license = licenseRepository.findByOrganizationIdAndLicenseId(organizationId, licenseId);
-
         Organization org = retrieveOrgInfo(organizationId, clientType);
 
-        return license
-                .withOrganizationName( org.getName())
-                .withContactName( org.getContactName())
-                .withContactEmail( org.getContactEmail() )
-                .withContactPhone( org.getContactPhone() )
-                .withComment(config.getExampleProperty());
+        return license.withOrganizationName(org.getName())
+		            .withContactName(org.getContactName())
+		            .withContactEmail(org.getContactEmail())
+		            .withContactPhone(org.getContactPhone());
     }
 
     public List<License> getLicensesByOrg(String organizationId){
@@ -77,8 +73,18 @@ public class LicenseService {
     }
 
     public List<License> getAllLicenses(){
-        return StreamSupport.stream(licenseRepository.findAll().spliterator(), false)
-        		.collect(Collectors.toList());
+    	List<License> licenseList= StreamSupport.stream(licenseRepository.findAll().spliterator(), false).collect(Collectors.toList());
+    	for(License license : licenseList) {
+    		Organization org = retrieveOrgInfo(license.getOrganizationId(), "rest");
+    		if(org!= null) {
+	    		license.withOrganizationName(org.getName())
+			            .withContactName(org.getContactName())
+			            .withContactEmail(org.getContactEmail())
+			            .withContactPhone(org.getContactPhone());
+    		}
+    	}
+    	
+    	return licenseList;
     }
 
     

@@ -1,10 +1,9 @@
-package com.prabhat.clients.licenses;
+package com.prabhat.clients;
 
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.HttpEntity;
@@ -14,18 +13,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import com.prabhat.config.AccessToken;
 import com.prabhat.model.License;
+import com.prabhat.security.AccessToken;
 
 @Component
 public class LicenseDiscoveryClient {
 	
-	@Value("${zuulService.organizationserviceUrl}")
-	private String organizationUrl;
-	
-	@Value("${zuulService.licensingserviceUrl}")
-	private String licensingserviceUrl;
-
     @Autowired
     private DiscoveryClient discoveryClient;
 

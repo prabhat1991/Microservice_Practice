@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.prabhat.licenses.config.ServiceConfig;
 import com.prabhat.licenses.model.License;
 import com.prabhat.licenses.services.LicenseService;
 
@@ -22,13 +21,10 @@ import io.swagger.annotations.ApiResponses;
 @RestController
 @RequestMapping(value="v1/licenses/")
 public class LicenseServiceController {
+	
     @Autowired
     private LicenseService licenseService;
 
-    @Autowired
-    private ServiceConfig serviceConfig;
-    
-    
     @ApiOperation(value = "View a list of all available License", response = List.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully License list"),
@@ -43,14 +39,12 @@ public class LicenseServiceController {
     
     @RequestMapping(value="organization/{organizationId}",method = RequestMethod.GET)
     public List<License> getLicenses( @PathVariable("organizationId") String organizationId) {
-
         return licenseService.getLicensesByOrg(organizationId);
     }
 
     @RequestMapping(value="organization/{organizationId}/license/{licenseId}",method = RequestMethod.GET)
     public License getLicenses( @PathVariable("organizationId") String organizationId,
                                 @PathVariable("licenseId") String licenseId) {
-
         return licenseService.getLicense(organizationId, licenseId, "");
     }
 

@@ -18,6 +18,10 @@ spring:
     password: postgres
     testWhileIdle: 'true'
     validationQuery: SELECT 1
+    
+serviceConfig:
+  jwtEnabled: true
+  signingKey: 'secret'
 
 #Setting the logging levels for the service
 logging:

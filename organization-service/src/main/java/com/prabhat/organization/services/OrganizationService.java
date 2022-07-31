@@ -18,9 +18,7 @@ public class OrganizationService {
 
     public void saveOrg(Organization org){
         org.setId( UUID.randomUUID().toString());
-
         orgRepository.save(org);
-
     }
 
     public void updateOrg(Organization org){
