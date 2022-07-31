@@ -31,7 +31,7 @@ metadata:
 spec:
   type: NodePort
   selector:
-    app: eureka-server-pod
+    app: eureka-server
   ports:
-    - port: 5432
-      targetPort: 5432
+    - port: 9001
+      targetPort: 9001

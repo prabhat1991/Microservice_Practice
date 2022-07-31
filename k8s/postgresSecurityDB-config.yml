@@ -1,40 +1,40 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: postgress-testdb-deploy
+  name: postgress-securitydb-deploy
   labels:
-    db: postgress-testdb
+    db: postgress-securitydb
 spec:
   replicas: 2
   selector:
     matchLabels:
-      db: postgress-testdb
+      db: postgress-securitydb
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        db: postgress-testdb
+        db: postgress-securitydb
     spec:
       containers:
-       - name: postgres-testdb-pod
+       - name: postgres-securitydb-pod
          image: postgres
          ports:
           - containerPort: 5432
          envFrom:
           - configMapRef:
-               name: postgress-testdb-configmap
+               name: postgress-securitydb-configmap
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: postgress-testdb-service
+  name: postgress-securitydb-service
   labels:
-    app: postgress-testdb-service
+    app: postgress-securitydb-service
 spec:
   type: NodePort
   selector:
-    db: postgress-testdb
+    db: postgress-securitydb
   ports:
     - port: 5432
       targetPort: 5432
@@ -43,10 +43,10 @@ spec:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: postgress-testdb-configmap
+  name: postgress-securitydb-configmap
   labels:
-    db: postgress-testdb
+    db: postgress-securitydb
 data:
-  POSTGRES_DB: testDB
+  POSTGRES_DB: securityDB
   POSTGRES_USER: postgres
   POSTGRES_PASSWORD: postgres
